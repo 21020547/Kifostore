@@ -1,0 +1,264 @@
+#: import RiseInTransition kivy.uix.screenmanager.RiseInTransition
+#: import FallOutTransition kivy.uix.screenmanager.FallOutTransition
+#: import Label kivy.uix.label.Label
+
+<CreateAccountScreen>:
+    name : "CreateAccount"
+
+    namee : namee
+    email : email
+    passw : passw
+
+    Image:
+        source: "Image/Theme/bluegradient.png"
+        allow_stretch: True
+        size : root.size
+
+    Image:
+        source: "Image/Theme/1.png"
+        allow_stretch: True
+        size : root.size
+
+
+    FloatLayout:
+
+        Label:
+            text: "Name"
+            pos_hint : {"x" : 0.235, "top" : 0.97}
+            size_hint : 0.1, 0.1
+            font_size : 25
+        
+        TextInput:
+            id: namee
+            multiline : False
+            pos_hint : {"x" : 0.25, "top" : 0.9}
+            size_hint : 0.55, None
+            height: 50
+            font_size : 25
+            write_tab : False
+            
+        Label:
+            text: "Email"
+            pos_hint : {"x" : 0.235, "top" : 0.8}
+            size_hint : 0.1, 0.1
+            font_size : 25
+
+        TextInput:
+            id: email
+            multiline : False
+            pos_hint : {"x" : 0.25, "top" : 0.73}
+            size_hint : 0.55, None
+            height: 50
+            font_size : 25
+            write_tab : False
+
+        Label:
+            text:  "Password"
+            pos_hint : {"x" : 0.259, "top" : 0.63}
+            size_hint : 0.1, 0.1
+            font_size : 25
+
+        TextInput:
+            id : passw
+            multiline : False
+            pos_hint : {"x" : 0.25, "top" : 0.56}
+            size_hint : 0.55, None
+            height: 50
+            font_size : 25
+            password : True
+            write_tab : False
+
+        Button :
+            pos_hint : {"x" : 0.8, "top" : 0.58}
+            size_hint : 0.1, 0.1
+            size_hint_x : None
+            size_hint_y : 0.125
+            width : self.height
+            background_down : "Icon/show.png"
+            background_normal : "Icon/notshow.png"
+            on_press:
+                root.PressPassword()
+            on_release:
+                root.ReleasePassword()
+
+
+        RoundedButton: 
+            text : "Submit"
+            pos_hint: {"x": 0.35, "top" : 0.4}
+            size_hint : 0.33, 0.1
+            font_size : root.width / 20
+            on_release:
+                root.SubmitBtn()
+
+
+        RoundedButton: 
+            text : "Already Have An Account? Login"
+            pos_hint: {"x": 0.25, "top" : 0.25}
+            size_hint : 0.5, 0.13
+            font_size : 25
+            on_release: 
+                root.LoginBtn()
+                root.manager.transition = RiseInTransition()
+                
+
+<LoginScreen>:
+    name : "Login"
+    email : email
+    passwordie : passwordie
+    
+    Image:
+        id: login_theme
+        source: "Image/Theme/bluegradient.png"
+        allow_stretch: True
+        size : root.size
+
+    Image:
+        source: "Image/Theme/1.png"
+        allow_stretch: True
+        size : root.size
+
+
+    Image:
+
+        source: "Icon/username_3.png"
+        allow_stretch: True
+        pos_hint : {"x" : 0.19, "top" : 0.85}
+        size_hint: None, None
+        size : 50, 50
+        
+    
+    Image:
+
+        source: "Icon/password_2.png"
+        allow_stretch: True
+        pos_hint : {"x" : 0.19, "top" : 0.63}
+        size_hint: None, None
+        size : 50, 50
+    
+    Label:
+        text: "Email"
+        pos_hint : {"x" : 0.233, "top" : 0.92}
+        size_hint : 0.1, 0.1
+        font_size: 25
+        
+    
+    TextInput:
+        
+        id : email
+        background_color : 
+        multiline : False
+        pos_hint : {"x" : 0.25, "top" : 0.85}
+        size_hint : 0.55, None
+        height : 50
+        font_size : 25
+        write_tab : False
+        
+    Label:
+        text: "Password"
+        pos_hint : {"x" : 0.26, "top" : 0.7}
+        size_hint : 0.1, 0.1
+        font_size : 25
+
+    TextInput:
+        id : passwordie
+        multiline : False
+        pos_hint : {"x" : 0.25, "top" : 0.63}
+        size_hint : 0.55, None
+        height: 50
+        font_size : 25
+        password : True
+        write_tab : False
+
+    Button :
+        pos_hint : {"x" : 0.79, "top" : 0.65}
+        size_hint_x : None
+        size_hint_y : 0.125
+        width : self.height
+        background_down : "Icon/show.png"
+        background_normal : "Icon/notshow.png"
+        on_press:
+            root.PressPassword()
+        on_release:
+            root.ReleasePassword()
+
+    RoundedButton:
+        text: "Login"
+        pos_hint : {"x" : 0.36, "top" : 0.45}
+        size_hint : 0.28, 0.12
+        font_size : root.width / 20
+        on_release:
+            root.LoginBtn()
+            root.manager.transition = FallOutTransition() 
+
+    RoundedButton:
+        text: "Create Your New Account"
+        pos_hint : {"x" : 0.2, "top" : 0.25}
+        size_hint : 0.6, 0.12
+        font_size : 30
+        on_release: 
+            root.CreateAccountBtn()
+            root.manager.transition = FallOutTransition()
+    
+    Button:
+        text: "?"
+        
+        size_hint : 0.1, 0.1
+        on_release:
+            root.DesignMode()
+            root.manager.transition = RiseInTransition()
+
+<MainScreen>:
+    name : "Main"
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        canvas:
+            Color:
+                rgba: 0, 1, 1, 0.8
+            Rectangle: 
+                size : self.size
+
+
+        FileChooserIconView:
+            id: filechooser 
+            rootpath : root.folder_path
+
+            on_selection :
+                root.ImageSelected(filechooser.selection)
+                root.manager.transition = FallOutTransition()
+
+        Button:
+            pos_hint : {"x" : 0.45, "top" : 0.1}
+            size_hint : 0.1, 0.1
+            text : "Log out"
+            on_release:
+                root.LogoutBtn()
+                root.manager.transition = FallOutTransition()
+
+
+<ImageScreen>:
+    name: "Image"
+    Image:
+        id: my_image
+        source: root.source
+    
+    Button:
+        pos_hint : {"x" : 0, "top" : 1}
+        size_hint : 0.1, 0.1
+        text : "Back"
+        on_release:
+            root.XBtn()
+            root.manager.transition = RiseInTransition()
+    
+
+<RoundedButton@Button>:
+    background_color: 0,0,0,0
+    canvas.before:
+        Color: 
+            rgba: (48/255, 84/255, 150/255, 1)  if self.state=='normal' else (0/255,183/255,235/255,1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
+    
